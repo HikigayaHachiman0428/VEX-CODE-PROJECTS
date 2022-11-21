@@ -56,28 +56,29 @@ void cata(float speed) {
 
 void index(float speed) { roll1.spin(fwd, 120 * speed, voltageUnits::mV); }
 
-int AutoCata(){
-    float startTime;
-    int t = 5000;
-    while(1){
-        if(autoCata){
-            lck = 0;
-            startTime = Brain.timer(msec);
-            cata(-100);
-            delay(500);
-            while(getLimitValue && (Brain.timer(msec) - t < startTime) && !AutoCataInterrupt){
-                cata(-50);
-                delay(10);
-            }
-            cata(0);
-            lckReset = 1;
-            lck = 1;
-            autoCata = 0;
-            manual = 1;
-            AutoCataInterrupt = 0;            
-        }
+int AutoCata() {
+  float startTime;
+  int t = 5000;
+  while (1) {
+    if (autoCata) {
+      lck = 0;
+      startTime = Brain.timer(msec);
+      cata(-100);
+      delay(500);
+      while (getLimitValue && (Brain.timer(msec) - t < startTime) &&
+             !AutoCataInterrupt) {
+        cata(-50);
         delay(10);
+      }
+      cata(0);
+      lckReset = 1;
+      lck = 1;
+      autoCata = 0;
+      manual = 1;
+      AutoCataInterrupt = 0;
     }
+    delay(10);
+  }
 }
 
 int LCK() {
@@ -102,15 +103,19 @@ int LCK() {
   }
 }
 
-int AutoIntake()
-{
-  while(1)
-  {
-    while (autoItk)
-    {
+int AutoIntake() {
+  bool preItk = 0;
+  while (1) {
+    if (autoItk) {
       intake(100);
     }
+    if (!autoItk && preItk) {
+      intake(0);
+    }
+    preItk = autoItk;
+    delay(10);
   }
+  return 1;
 }
 
 #endif

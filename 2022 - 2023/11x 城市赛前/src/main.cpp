@@ -68,7 +68,7 @@ void usercontrol(void) {
 
     Ch();
     intake(100 * !L1 * !L2 * (R2 - R1));
-    index(50 * L2 * (R1 - R2));
+    index(100 * L2 * (R1 - R2));
     // Brain.Screen.printAt(10, 20, "LCKReset: %d", lckReset);
     // Brain.Screen.printAt(10, 40, "Manual: %d", manual);
     // Brain.Screen.printAt(10, 60, "lck: %d", lck);

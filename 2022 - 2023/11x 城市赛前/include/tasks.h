@@ -56,7 +56,7 @@ void cata(float speed){
     cat2.spin(fwd, -120*speed, voltageUnits::mV);
 }
 void index(float speed){
-    roll1.spin(fwd, 120*speed, voltageUnits::mV);
+    roll1.spin(fwd, 150*speed, voltageUnits::mV);
 }
 
 int AutoCata(){
